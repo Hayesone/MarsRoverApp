@@ -1,3 +1,4 @@
+
 public class Rover {
     public int X {get; set;}
     public int Y {get; set;}
@@ -7,5 +8,10 @@ public class Rover {
         X = x;
         Y = y;
         Direction = direction;
+    }
+
+    internal object Move(char[] roverCommands)
+    {
+        throw new NotImplementedException();
     }
 }
