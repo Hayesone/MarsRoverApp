@@ -1,17 +1,21 @@
 
 public class Rover {
+    public Plateau OperatingArea {get; set;}
     public int X {get; set;}
     public int Y {get; set;}
     public char Direction {get;set;} // Only N/E/S/W
     private readonly char[] headings = new char[] { 'N', 'E', 'S', 'W' };
 
-    public Rover(int x, int y, char direction) {
+    public Rover(Plateau plateau, int x, int y, char direction) {
+        OperatingArea = plateau;
         X = x;
         Y = y;
         Direction = direction;
+
+        OperatingArea.AddRover(this);
     }
 
-    public string ProcessMovementCommands(Plateau plateau, char[] commands) {
+    public string ProcessMovementCommands(char[] commands) {
         foreach (char command in commands) {
             switch (command) {
                 case 'R':
@@ -21,10 +25,10 @@ public class Rover {
                     Rotate(command);
                     break;
                 case 'M':
-                    Move(plateau);
+                    Move();
                     break;
                 default:
-                    break; // Catch errors
+                    throw new ArgumentException($"Error invalid command: {command}");
             }
         }
         return $"{X} {Y} {Direction}";
@@ -41,8 +45,9 @@ public class Rover {
         }
     }
 
-    // Try to perform move to new location.
-    private void Move(Plateau plateau) {
+    // Try to perform move to new location. If move is invalid it doesn't move.
+    private void Move() {
+        Plateau plateau = OperatingArea;
         int originX = X;
         int originY = Y;
         int heading = Direction;
@@ -56,34 +61,30 @@ public class Rover {
                     Y = destinationY;
                     break;
                 }
-                Console.WriteLine("Rover: Cannot drive off plateau");
-                break; // Need to catch errors
+                break;
             case 'E':
                 destinationX = originX + 1;
                 if (plateau.isValidMove(originX, destinationX)) {
                     X = destinationX;
                     break;
                 }
-                Console.WriteLine("Rover: Cannot drive off plateau");
-                break; // Need to catch errors
+                break;
             case 'S':
                 destinationY = originY - 1;
                 if (plateau.isValidMove(originX, destinationY)) {
                     Y = destinationY;
                     break;
                 }
-                Console.WriteLine("Rover: Cannot drive off plateau");
-                break; // Need to catch errors
+                break;
             case 'W':
                 destinationX = originX - 1;
                 if (plateau.isValidMove(originX, destinationX)) {
                     X = destinationX;
                     break;
                 }
-                Console.WriteLine("Rover: Cannot drive off plateau");
-                break; // Need to catch errors
+                break;
             default:
-                break; // Need to catch errors
+                throw new ArgumentException($"Error invalid heading: {heading}");
         }
 
     }

@@ -9,22 +9,28 @@ class Program {
         var plateauHeight = plateauInput.Item2;
         Plateau plateau = new Plateau(plateauWidth, plateauHeight);
 
-        Console.WriteLine("Enter Rover starting position and heading e.g. 'X Y D':");
-        var roverLandInput = RoverLandInput(Console.ReadLine());
-        var roverX = roverLandInput.Item1;
-        var roverY = roverLandInput.Item2;
-        var roverDirection = roverLandInput.Item3;
-        Rover rover = new Rover(roverX, roverY, roverDirection);
+        while (true) {
+            Console.WriteLine("Enter Rover starting position and heading e.g. 'X Y D':");
+            var roverLandInput = RoverLandInput(Console.ReadLine());
+            var roverX = roverLandInput.Item1;
+            var roverY = roverLandInput.Item2;
+            var roverDirection = roverLandInput.Item3;
+            Rover rover = new Rover(plateau, roverX, roverY, roverDirection);
 
-        Console.WriteLine("Enter in movement commands for Rover e.g. 'LLMLMLRRLM':");
-        var roverCommands = RoverCommandsInput(Console.ReadLine());
-        var roverEndPosition = rover.ProcessMovementCommands(plateau, roverCommands);
+            Console.WriteLine("Enter in movement commands for Rover e.g. 'LLMLMLRRLM':");
+            var roverCommands = RoverCommandsInput(Console.ReadLine());
+            var roverEndPosition = rover.ProcessMovementCommands(roverCommands);
 
-        Console.WriteLine($"{roverEndPosition}");
-        Console.ReadLine(); // Temp hold before exit
+            Console.WriteLine($"{roverEndPosition}");
+            Console.WriteLine("If you would like to land another rover press enter, else type 'exit'");
+            if (Console.ReadLine() == "exit") {
+                break;
+            }
+        }
         
     }
 
+    // Currently assuming all inputs are in the correct format.
     public static (int, int) PlateauInput(string plateauCoords) {
         var plateauInput = plateauCoords.Split(" ");
         int x = int.Parse(plateauInput[0]);
