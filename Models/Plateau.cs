@@ -12,14 +12,26 @@ public class Plateau {
     }
 
     public void AddRover(Rover rover) {
-        int landingX = rover.X;
-        int landingY = rover.Y;
-        foreach (Rover landedRover in LandedRovers) {
-            if (landingX == landedRover.X && landingY == landedRover.Y) {
-                throw new RoverLandingException("A rover cannot land on another rover!");
+        try{
+            int landingX = rover.X;
+            int landingY = rover.Y;
+            foreach (Rover landedRover in LandedRovers) {
+                if (landingX == landedRover.X && landingY == landedRover.Y) {
+                    throw new RoverLandingException("A rover cannot land on another rover!");
+                }
             }
+            LandedRovers.Add(rover);
+        } catch (RoverLandingException) {
+            Console.WriteLine("Rover already in that landing zone. Please choose different landing coords 'X Y'.");
+            string newCoordsInput = Console.ReadLine();
+            var newCoords = newCoordsInput.Split(" ");
+            int newX = int.Parse(newCoords[0]);
+            int newY = int.Parse(newCoords[1]);
+            rover.X = newX;
+            rover.Y = newY;
+            AddRover(rover);
         }
-        LandedRovers.Add(rover);
+        
     }
 
     public bool isMoveOutOfBounds(int newX, int newY) {
