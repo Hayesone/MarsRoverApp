@@ -18,9 +18,10 @@ class Program {
 
         Console.WriteLine("Enter in movement commands for Rover e.g. 'LLMLMLRRLM':");
         var roverCommands = RoverCommandsInput(Console.ReadLine());
-        var roverEndPosition = rover.Move(roverCommands);
-        
+        var roverEndPosition = rover.ProcessMovementCommands(plateau, roverCommands);
 
+        Console.WriteLine($"{roverEndPosition}");
+        Console.ReadLine(); // Temp hold before exit
         
     }
 
