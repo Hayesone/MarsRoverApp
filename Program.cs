@@ -3,11 +3,12 @@
 class Program {
     static void Main(string[] args) {
         
-        
         var plateauInput = PlateauInput();
         var plateauWidth = plateauInput.Item1;
         var plateauHeight = plateauInput.Item2;
         Plateau plateau = new Plateau(plateauWidth, plateauHeight);
+
+        List<string> roverOutcomes = new List<string>(); // List to store rover outcomes
 
         while (true) {
             var roverLandInput = RoverLandInput();
@@ -16,17 +17,23 @@ class Program {
             var roverDirection = roverLandInput.Item3;
             Rover rover = new Rover(plateau, roverX, roverY, roverDirection);
 
-            
             var roverCommands = RoverCommandsInput();
             var roverEndPosition = rover.ProcessMovementCommands(roverCommands);
 
-            Console.WriteLine($"Rover end: {roverEndPosition}");
-            Console.WriteLine("If you would like to land another rover press enter, else type 'exit'");
-            if (Console.ReadLine() == "exit") {
+            roverOutcomes.Add(roverEndPosition);
+
+            Console.WriteLine("If you would like to land another rover press enter, else type 'done'");
+            if (Console.ReadLine() == "done") {
                 break;
             }
         }
-        
+
+        Console.WriteLine("Rover locations and headings:");
+        foreach (var outcome in roverOutcomes) {
+            Console.WriteLine(outcome);
+        }
+
+        Console.ReadLine(); // Temp break before close
     }
 
     // Currently assuming all inputs are in the correct format.
@@ -68,7 +75,7 @@ class Program {
     public static char[] RoverCommandsInput() {
         
         try {
-            Console.WriteLine("Enter in movement commands ('L','R' or 'M') for Rover e.g. 'LLMLMLRRLM':");
+            Console.WriteLine("Enter in movement commands ('L','R','M') for Rover e.g. 'LLMLMLRRLM':");
             string commandString = Console.ReadLine();
             char[] commands = commandString.ToCharArray();
 

@@ -15,14 +15,19 @@ public class Plateau {
         try{
             int landingX = rover.X;
             int landingY = rover.Y;
+            bool outOfBounds = isMoveOutOfBounds(landingX, landingY);
+
+            if (outOfBounds) {
+                throw new RoverLandingException("Rover: Not safe to land there.");
+            }
             foreach (Rover landedRover in LandedRovers) {
                 if (landingX == landedRover.X && landingY == landedRover.Y) {
-                    throw new RoverLandingException("A rover cannot land on another rover!");
+                    throw new RoverLandingException("Rover: Not safe to land on another.");
                 }
             }
             LandedRovers.Add(rover);
         } catch (RoverLandingException) {
-            Console.WriteLine("Rover already in that landing zone. Please choose different landing coords 'X Y'.");
+            Console.WriteLine("It's not safe to land there. Please choose different landing coords 'X Y'.");
             string newCoordsInput = Console.ReadLine();
             var newCoords = newCoordsInput.Split(" ");
             int newX = int.Parse(newCoords[0]);
@@ -35,12 +40,12 @@ public class Plateau {
     }
 
     public bool isMoveOutOfBounds(int newX, int newY) {
-        if (newX < 0 || Width <= newX) {
-            Console.WriteLine("Rover: Cannot drive off plateau");
+        if (newX < 0 || Width < newX) {
+            Console.WriteLine("Rover: Cannot go outside the plateau.");
             return true;
         }
-        if (newY < 0 || Width <= newY) {
-            Console.WriteLine("Rover: Cannot drive off plateau");
+        if (newY < 0 || Width < newY) {
+            Console.WriteLine("Rover: Cannot go outside the plateau.");
             return true;
         }
         return false; // not out of bounds
