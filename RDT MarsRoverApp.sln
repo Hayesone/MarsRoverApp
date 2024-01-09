@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDT MarsRoverApp", "RDT MarsRoverApp.csproj", "{6C40437E-6C42-4A2F-9230-D23C196C427D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C40437E-6C42-4A2F-9230-D23C196C427D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C40437E-6C42-4A2F-9230-D23C196C427D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C40437E-6C42-4A2F-9230-D23C196C427D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C40437E-6C42-4A2F-9230-D23C196C427D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC135515-1EB8-4E6B-9721-CDA59FBCBFAB}
+	EndGlobalSection
+EndGlobal
