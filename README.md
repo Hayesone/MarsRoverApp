@@ -1,4 +1,6 @@
 # Mars Rover App
+C# .NET 6 - Console App
+
 Trello used. https://trello.com/invite/b/XUxZ1l34/ATTIa006286cc4e61c0b8b6ad3367db57e8bACD5C101/marsroverapp
 ## Thought process
 
@@ -28,7 +30,7 @@ X Y Direction
 
 ### Plateau
 
-Initially plateau wasn't a class, but it became clear that in order to validate the moves of the Rover it needed to know where it is at, and by referencing the plateau object we can get this info. It seems to align with the idea of the Rover being on Mars and knowing its "operation area" or plateau that it can move around on.
+Initially plateau wasn't a class, but it became clear that in order to validate the moves of the Rover it needed to know where it is at, and by referencing the plateau object we can get this info. It seems to align with the idea of the Rover being on Mars and knowing its "operation area" or plateau that it can move around on. There is also a list rovers with a rover being added each time it "lands" on the plateau.
 
 ### Rover
 
