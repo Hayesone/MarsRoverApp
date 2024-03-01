@@ -15,7 +15,6 @@ public class Plateau {
         try{
             int landingX = rover.X;
             int landingY = rover.Y;
-            bool outOfBounds = isMoveOutOfBounds(landingX, landingY);
 
             if (isValidMove(landingX, landingY)) {
                 LandedRovers.Add(rover);
