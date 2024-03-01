@@ -64,7 +64,7 @@ public class Rover {
                 break;
             case 'E':
                 destinationX = originX + 1;
-                if (plateau.isValidMove(originX, destinationX)) {
+                if (plateau.isValidMove(destinationX, originY)) {
                     X = destinationX;
                     break;
                 }
@@ -78,7 +78,7 @@ public class Rover {
                 break;
             case 'W':
                 destinationX = originX - 1;
-                if (plateau.isValidMove(originX, destinationX)) {
+                if (plateau.isValidMove(destinationX, originY)) {
                     X = destinationX;
                     break;
                 }

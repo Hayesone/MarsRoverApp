@@ -17,15 +17,11 @@ public class Plateau {
             int landingY = rover.Y;
             bool outOfBounds = isMoveOutOfBounds(landingX, landingY);
 
-            if (outOfBounds) {
+            if (isValidMove(landingX, landingY)) {
+                LandedRovers.Add(rover);
+            } else {
                 throw new RoverLandingException("Rover: Not safe to land there.");
             }
-            foreach (Rover landedRover in LandedRovers) {
-                if (landingX == landedRover.X && landingY == landedRover.Y) {
-                    throw new RoverLandingException("Rover: Not safe to land on another.");
-                }
-            }
-            LandedRovers.Add(rover);
         } catch (RoverLandingException) {
             Console.WriteLine("It's not safe to land there. Please choose different landing coords 'X Y'.");
             string newCoordsInput = Console.ReadLine();
@@ -35,7 +31,7 @@ public class Plateau {
             rover.X = newX;
             rover.Y = newY;
             AddRover(rover);
-        }
+        } 
         
     }
 
@@ -54,7 +50,7 @@ public class Plateau {
     public bool isMoveBlocked(int newX, int newY) {
         foreach (Rover rover in LandedRovers) {
             if (newX == rover.X && newY == rover.Y) {
-                Console.WriteLine("Cannot move here, another rover is there!");
+                Console.WriteLine($"Another rover is at {newX} {newY}!");
                 return true;
             }
         }
